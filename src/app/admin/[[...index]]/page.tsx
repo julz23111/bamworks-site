@@ -1,5 +1,5 @@
 "use client";
-
+export const runtime = "edge";
 import { NextStudio } from "next-sanity/studio";
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
