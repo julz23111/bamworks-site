@@ -13,7 +13,7 @@ export default async function HomePage() {
   try {
     data = (await sanity.fetch(query)) ?? {};
   } catch (error) {
-    console.log("Sanity fetch failed, using defaults");
+    console.error("Sanity fetch failed, using defaults:", error);
   }
 
   const brandName = data.brandName ?? "Bamworks LLC";

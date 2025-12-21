@@ -1,3 +1,5 @@
+import { siteConfig } from '@/lib/config';
+
 export default function ContactPage() {
   return (
     <main className="min-h-screen">
@@ -34,7 +36,7 @@ export default function ContactPage() {
                     placeholder="Phone Number (optional)" 
                     className="rounded-xl glass-input px-4 py-3" 
                   />
-                  <select name="service" className="rounded-xl glass-input px-4 py-3">
+                  <select name="service" className="rounded-xl glass-input px-4 py-3" required>
                     <option value="">Select a Service</option>
                     <option value="Drone">Drone Video/Photography</option>
                     <option value="Remodeling">Remodeling/Home Repair</option>
@@ -75,8 +77,8 @@ export default function ContactPage() {
                         <p className="text-white/70 text-sm">
                           Get a response within 24 hours
                         </p>
-                        <a href="mailto:info@bamworks.com" className="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">
-                          info@bamworks.com
+                        <a href={`mailto:${siteConfig.contact.email}`} className="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">
+                          {siteConfig.contact.email}
                         </a>
                       </div>
                     </div>
@@ -94,8 +96,8 @@ export default function ContactPage() {
                         <p className="text-white/70 text-sm">
                           Call or text for quick questions
                         </p>
-                        <a href="tel:+15555551234" className="text-purple-400 hover:text-purple-300 text-sm mt-2 inline-block">
-                          (555) 555-1234
+                        <a href={siteConfig.contact.phoneHref} className="text-purple-400 hover:text-purple-300 text-sm mt-2 inline-block">
+                          {siteConfig.contact.phone}
                         </a>
                       </div>
                     </div>
@@ -111,9 +113,9 @@ export default function ContactPage() {
                       <div>
                         <h3 className="text-white font-semibold mb-1">Business Hours</h3>
                         <div className="text-white/70 text-sm space-y-1 mt-2">
-                          <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
-                          <p>Saturday: 9:00 AM - 4:00 PM</p>
-                          <p>Sunday: By appointment</p>
+                          <p>{siteConfig.businessHours.weekdays}</p>
+                          <p>{siteConfig.businessHours.saturday}</p>
+                          <p>{siteConfig.businessHours.sunday}</p>
                         </div>
                       </div>
                     </div>
