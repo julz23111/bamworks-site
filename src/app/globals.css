@@ -58,8 +58,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-
-
 /* Global base */
 html {
   scroll-behavior: smooth;
@@ -97,8 +95,6 @@ body::before {
   mix-blend-mode: multiply;
 }
 
-
-
 /* Links */
 a {
   color: inherit;
@@ -131,8 +127,6 @@ textarea {
   border-radius: 14px;
 }
 
-
-
 button {
   font: inherit;
 }
@@ -162,8 +156,6 @@ button {
   border-radius: 999px;
   border: 2px solid rgba(255, 255, 255, 0.35);
 }
-
-
 
 /* Subtle motion */
 @media (prefers-reduced-motion: no-preference) {
@@ -203,8 +195,6 @@ button {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
 }
-
-
 
 /* Soft section divider */
 .divider {
