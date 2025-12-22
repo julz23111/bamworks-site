@@ -110,7 +110,7 @@ export default function ServicesPage() {
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <figure className="overflow-hidden rounded-2xl border bg-neutral-50 lift">
                   <Image
-                    src="/drone-1.jpg"
+                    src="/drone-1.JPG"
                     alt="Drone photo example 1"
                     width={1200}
                     height={800}
@@ -121,7 +121,7 @@ export default function ServicesPage() {
 
                 <figure className="overflow-hidden rounded-2xl border bg-neutral-50 lift">
                   <Image
-                    src="/drone-2.jpg"
+                    src="/drone-2.JPG"
                     alt="Drone photo example 2"
                     width={1200}
                     height={800}
@@ -191,7 +191,7 @@ export default function ServicesPage() {
               <div className="mt-4 grid gap-4 sm:grid-cols-3">
                 <figure className="overflow-hidden rounded-2xl border bg-neutral-50 lift">
                   <Image
-                    src="/remodel-1.jpg"
+                    src="/remodel-1.JPG"
                     alt="Remodeling photo example 1"
                     width={1200}
                     height={800}
@@ -201,7 +201,7 @@ export default function ServicesPage() {
 
                 <figure className="overflow-hidden rounded-2xl border bg-neutral-50 lift">
                   <Image
-                    src="/remodel-2.jpg"
+                    src="/remodel-2.JPG"
                     alt="Remodeling photo example 2"
                     width={1200}
                     height={800}
@@ -211,7 +211,7 @@ export default function ServicesPage() {
 
                 <figure className="overflow-hidden rounded-2xl border bg-neutral-50 lift sm:col-span-3">
                   <Image
-                    src="/remodel-3.jpg"
+                    src="/remodel-3.JPG"
                     alt="Remodeling photo example 3"
                     width={1600}
                     height={900}

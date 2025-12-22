@@ -43,7 +43,7 @@ export default function AboutPage() {
 
           <div className="overflow-hidden rounded-3xl border bg-neutral-50 lift">
             <Image
-              src="/drone-1.jpg"
+              src="/drone-1.JPG"
               alt="Drone and remodeling work by Bamworks"
               width={1200}
               height={800}
