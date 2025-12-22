@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+export const runtime = "edge";
 type ContactPageProps = {
   searchParams?: Promise<{ sent?: string }>;
 };
