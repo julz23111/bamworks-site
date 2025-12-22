@@ -1,38 +1,63 @@
+export const runtime = "edge";
+
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-export const runtime = "edge";
+
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
 export async function POST(req: Request) {
   const form = await req.formData();
 
-  const name = String(form.get("name") ?? "");
-  const email = String(form.get("email") ?? "");
-  const phone = String(form.get("phone") ?? "");
-  const service = String(form.get("service") ?? "");
-  const message = String(form.get("message") ?? "");
+  const name = String(form.get("name") ?? "").trim();
+  const email = String(form.get("email") ?? "").trim();
+  const phone = String(form.get("phone") ?? "").trim();
+  const service = String(form.get("service") ?? "").trim();
+  const message = String(form.get("message") ?? "").trim();
 
-  // 1) Email to business
-  await resend.emails.send({
-    from: process.env.CONTACT_FROM_EMAIL!,
-    to: process.env.CONTACT_TO_EMAIL!,
-    subject: `New ${service} lead from ${name}`,
+  // Minimal validation
+  if (!email || !message) {
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  }
+
+  const from = process.env.CONTACT_FROM_EMAIL;
+  const to = process.env.CONTACT_TO_EMAIL;
+
+  if (!process.env.RESEND_API_KEY || !from || !to) {
+    console.error("Missing env vars for contact form", {
+      hasResendKey: Boolean(process.env.RESEND_API_KEY),
+      hasFrom: Boolean(from),
+      hasTo: Boolean(to),
+    });
+    return NextResponse.json(
+      { error: "Server email configuration is missing." },
+      { status: 500 }
+    );
+  }
+
+  // Email to business only
+  const result = await resend.emails.send({
+    from,
+    to,
     replyTo: email,
+    subject: `New ${service || ""} inquiry from ${name || "Website"}`.trim(),
     text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\n\nMessage:\n${message}`,
   });
 
-  // 2) Auto-reply to customer
-  await resend.emails.send({
-    from: process.env.CONTACT_FROM_EMAIL!,
-    to: email,
-    subject: "We got your message — Bamworks LLC",
-    text:
-      `Hey ${name || "there"},\n\n` +
-      `Thanks for reaching out about ${service}.\n` +
-      `Your message was sent successfully, and we’ll follow up soon.\n\n` +
-      `— Bamworks LLC`,
+  // Resend returns { data, error } — only redirect to success when accepted
+  if ((result as any)?.error) {
+    console.error("Resend send error", (result as any).error);
+    return NextResponse.json(
+      { error: "Email failed to send. Check Resend settings." },
+      { status: 502 }
+    );
+  }
+
+  console.log("Contact email sent", {
+    to,
+    subject: `New ${service || ""} inquiry from ${name || "Website"}`.trim(),
+    id: (result as any)?.data?.id,
   });
 
-  // 3) Redirect back with success flag (simple “email sent” UX)
-  return NextResponse.redirect(new URL("/?sent=1#contact", req.url), 303);
+  // Redirect back to contact page after send
+  return NextResponse.redirect(new URL("/contact?sent=1", req.url), 303);
 }

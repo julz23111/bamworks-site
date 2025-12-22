@@ -1,26 +1,277 @@
 @import "tailwindcss";
 
+/*
+  Bamworks Global Theme (white + gray + green)
+  - Premium background with subtle green energy
+  - Better typography, focus states, and form defaults
+  - Utility helpers for glass cards and soft borders
+*/
+
 :root {
+  /* Core palette */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a; /* slate-900 */
+
+  /* Brand */
+  --primary: #16a34a; /* green-600 */
+  --primary-700: #15803d; /* green-700 */
+  --primary-foreground: #ffffff;
+
+  /* UI surfaces */
+  --muted: #f8fafc; /* slate-50 */
+  --muted-foreground: #475569; /* slate-600 */
+  --surface: #f1f5f9; /* slate-100 */
+
+  /* Borders/shadows */
+  --border: rgba(15, 23, 42, 0.10);
+  --border-strong: rgba(15, 23, 42, 0.14);
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.10);
+  --shadow-lg: 0 22px 60px rgba(15, 23, 42, 0.14);
+
+  /* Radii */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Focus ring */
+  --ring: rgba(22, 163, 74, 0.35);
+
+  /* Gradient accents */
+  --g1: rgba(22, 163, 74, 0.12);
+  --g2: rgba(15, 23, 42, 0.08);
+  --g3: rgba(148, 163, 184, 0.10); /* slate-400-ish */
 }
 
 @theme inline {
+  /* Tailwind v4 theme mapping */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0b1220;
+    --foreground: #e5e7eb;
+
+    --primary: #22c55e; /* green-500 */
+    --primary-700: #16a34a;
+    --primary-foreground: #052e16;
+
+    --muted: rgba(255, 255, 255, 0.06);
+    --muted-foreground: rgba(229, 231, 235, 0.78);
+    --surface: rgba(255, 255, 255, 0.035);
+
+    --border: rgba(229, 231, 235, 0.12);
+    --border-strong: rgba(229, 231, 235, 0.18);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+    --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 26px 80px rgba(0, 0, 0, 0.55);
+
+    --ring: rgba(34, 197, 94, 0.35);
+
+    --g1: rgba(34, 197, 94, 0.14);
+    --g2: rgba(255, 255, 255, 0.08);
+    --g3: rgba(148, 163, 184, 0.10);
   }
 }
 
+/* Global base */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
+  min-height: 100vh;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* "Bad ass" background */
+  background:
+    radial-gradient(1100px 650px at 12% 0%, var(--g1), transparent 60%),
+    radial-gradient(900px 520px at 88% 10%, var(--g2), transparent 62%),
+    radial-gradient(700px 520px at 50% 120%, var(--g3), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.95)),
+    var(--background);
+}
+
+/* Subtle noise overlay (pure CSS, no assets) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(15, 23, 42, 0.06) 0, rgba(15, 23, 42, 0.06) 1px, transparent 1px, transparent 2px),
+    repeating-linear-gradient(90deg, rgba(15, 23, 42, 0.04) 0, rgba(15, 23, 42, 0.04) 1px, transparent 1px, transparent 2px);
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background:
+      radial-gradient(1100px 650px at 12% 0%, var(--g1), transparent 60%),
+      radial-gradient(900px 520px at 88% 10%, var(--g2), transparent 62%),
+      radial-gradient(700px 520px at 50% 120%, var(--g3), transparent 58%),
+      linear-gradient(180deg, rgba(11, 18, 32, 0.92), rgba(11, 18, 32, 0.98)),
+      var(--background);
+  }
+  body::before {
+    opacity: 0.10;
+    mix-blend-mode: overlay;
+  }
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.92;
+}
+
+::selection {
+  background: rgba(22, 163, 74, 0.22);
+}
+
+/* Focus states (keyboard-friendly) */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Form defaults */
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  input,
+  select,
+  textarea {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+button {
+  font: inherit;
+}
+
+/* Better default borders */
+* {
+  border-color: var(--border);
+}
+
+/* Scrollbar (nice, subtle) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(22, 163, 74, 0.55) rgba(15, 23, 42, 0.08);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(22, 163, 74, 0.55);
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  ::-webkit-scrollbar-thumb {
+    border: 2px solid rgba(0, 0, 0, 0.25);
+  }
+}
+
+/* Subtle motion */
+@media (prefers-reduced-motion: no-preference) {
+  .lift {
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    will-change: transform;
+  }
+
+  .lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-strong);
+  }
+
+  .fade-in {
+    animation: fade-in 420ms ease-out both;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Glass card helper */
+.glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Soft section divider */
+.divider {
+  border-top: 1px solid var(--border);
+}
+
+/* Container helper (optional) */
+.container-max {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
