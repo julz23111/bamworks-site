@@ -31,6 +31,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
         <form
           action="/api/contact"
           method="POST"
+          encType="multipart/form-data"
           className="glass lift p-7"
         >
           <div className="grid gap-4">
@@ -71,6 +72,18 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               className="min-h-[160px] rounded-xl border bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-green-600/30"
               required
             />
+
+            <div className="rounded-2xl border bg-white/70 p-4">
+              <div className="text-sm font-semibold text-neutral-900">Attach files (optional)</div>
+              <p className="mt-1 text-xs text-neutral-500">Up to 3 files • 5MB each • JPG/PNG/WEBP/PDF</p>
+              <input
+                name="files"
+                type="file"
+                multiple
+                accept=".jpg,.jpeg,.png,.webp,.pdf"
+                className="mt-3 block w-full text-sm file:mr-4 file:rounded-lg file:border-0 file:bg-green-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-green-700"
+              />
+            </div>
 
             <button
               type="submit"

@@ -105,7 +105,7 @@ export default function ServicesPage() {
 
             <div>
               <h3 className="text-sm font-semibold text-neutral-900">Drone gallery</h3>
-              <p className="mt-2 text-sm text-neutral-600">Two sample shots. Replace images in /public.</p>
+              <p className="mt-2 text-sm text-neutral-600">Two sample shots.</p>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <figure className="overflow-hidden rounded-2xl border bg-neutral-50 lift">
@@ -162,7 +162,7 @@ export default function ServicesPage() {
               <div className="mt-7">
                 <h3 className="text-sm font-semibold text-neutral-900">How it works</h3>
                 <ol className="mt-3 space-y-2 text-neutral-700">
-                  <li>1. You message us with details + photos.</li>
+                  <li>1. You message us with details + Contact info.</li>
                   <li>2. We confirm scope and schedule.</li>
                   <li>3. We complete the work and follow up.</li>
                 </ol>
