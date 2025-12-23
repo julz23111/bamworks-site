@@ -9,8 +9,25 @@ const query = `*[_type=="siteSettings"][0]{
   email, phone
 }`;
 
+interface SiteSettings {
+  brandName?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  nav?: string[];
+  drone?: {
+    headline?: string;
+    body?: string;
+  };
+  remodeling?: {
+    headline?: string;
+    body?: string;
+  };
+  email?: string;
+  phone?: string;
+}
+
 export default async function HomePage() {
-  const data = (await sanity.fetch(query)) ?? {};
+  const data: SiteSettings = (await sanity.fetch(query)) ?? {};
 
   const brandName = data.brandName ?? "Bamworks LLC";
   const heroTitle = data.heroTitle ?? "engineering the way forward";
