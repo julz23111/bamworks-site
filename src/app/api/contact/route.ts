@@ -20,7 +20,8 @@ export async function POST(req: Request) {
   }
 
   const from = process.env.CONTACT_FROM_EMAIL;
-  const to = process.env.CONTACT_TO_EMAIL;
+  const to = "julz@complext.ai";
+  const forwardTo = "bamworksdhec@gmail.com";
 
   if (!process.env.RESEND_API_KEY || !from || !to) {
     console.error("Missing env vars for contact form", {
@@ -38,9 +39,15 @@ export async function POST(req: Request) {
   const result = await resend.emails.send({
     from,
     to,
+    cc: forwardTo,
     replyTo: email,
     subject: `New ${service || ""} inquiry from ${name || "Website"}`.trim(),
-    text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\n\nMessage:\n${message}`,
+    text:
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      `Phone: ${phone}\n` +
+      `Service: ${service}\n\n` +
+      `Message:\n${message}`,
   });
 
   // Resend returns { data, error } — only redirect to success when accepted
@@ -54,6 +61,7 @@ export async function POST(req: Request) {
 
   console.log("Contact email sent", {
     to,
+    cc: forwardTo,
     subject: `New ${service || ""} inquiry from ${name || "Website"}`.trim(),
     id: (result as any)?.data?.id,
   });
