@@ -58,37 +58,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b1220;
-    --foreground: #e5e7eb;
-
-    --primary: #22c55e; /* green-500 */
-    --primary-700: #16a34a;
-    --primary-foreground: #052e16;
-
-    --muted: rgba(255, 255, 255, 0.06);
-    --muted-foreground: rgba(229, 231, 235, 0.78);
-    --surface: rgba(255, 255, 255, 0.035);
-
-    --border: rgba(229, 231, 235, 0.12);
-    --border-strong: rgba(229, 231, 235, 0.18);
-
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
-    --shadow-md: 0 14px 34px rgba(0, 0, 0, 0.45);
-    --shadow-lg: 0 26px 80px rgba(0, 0, 0, 0.55);
-
-    --ring: rgba(34, 197, 94, 0.35);
-
-    --g1: rgba(34, 197, 94, 0.14);
-    --g2: rgba(255, 255, 255, 0.08);
-    --g3: rgba(148, 163, 184, 0.10);
-  }
-}
-
 /* Global base */
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
@@ -123,21 +96,6 @@ body::before {
   mix-blend-mode: multiply;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background:
-      radial-gradient(1100px 650px at 12% 0%, var(--g1), transparent 60%),
-      radial-gradient(900px 520px at 88% 10%, var(--g2), transparent 62%),
-      radial-gradient(700px 520px at 50% 120%, var(--g3), transparent 58%),
-      linear-gradient(180deg, rgba(11, 18, 32, 0.92), rgba(11, 18, 32, 0.98)),
-      var(--background);
-  }
-  body::before {
-    opacity: 0.10;
-    mix-blend-mode: overlay;
-  }
-}
-
 /* Links */
 a {
   color: inherit;
@@ -170,14 +128,6 @@ textarea {
   border-radius: 14px;
 }
 
-@media (prefers-color-scheme: dark) {
-  input,
-  select,
-  textarea {
-    background: rgba(255, 255, 255, 0.06);
-  }
-}
-
 button {
   font: inherit;
 }
@@ -206,15 +156,6 @@ button {
   background: rgba(22, 163, 74, 0.55);
   border-radius: 999px;
   border: 2px solid rgba(255, 255, 255, 0.35);
-}
-
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.06);
-  }
-  ::-webkit-scrollbar-thumb {
-    border: 2px solid rgba(0, 0, 0, 0.25);
-  }
 }
 
 /* Subtle motion */
@@ -254,12 +195,6 @@ button {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-}
-
-@media (prefers-color-scheme: dark) {
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-  }
 }
 
 /* Soft section divider */
